@@ -1,4 +1,4 @@
-.PHONY: devw devt downw downt rebuildw rebuildt logs test shell deps
+.PHONY: devw devt down downw downt rebuildw rebuildt logs test shell deps
 
 # Run dev environment for Web
 devw:
@@ -7,6 +7,11 @@ devw:
 # Run dev environment for Telegram
 devt:
 		docker compose --env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.t.yml up
+
+# Stop and remove all dev containers for Web
+down:
+		docker compose --env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.w.yml down
+		docker compose --env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.t.yml down
 
 # Stop and remove all dev containers for Web
 downw:
@@ -32,7 +37,7 @@ logs:
 
 # Run tests inside container
 test:
-		docker compose exec shortener go test ./...
+		docker compose --env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.w.yml exec shortener-w go test ./...
 
 # Connect to app shell
 shell:
