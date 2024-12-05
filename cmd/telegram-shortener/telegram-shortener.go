@@ -4,15 +4,13 @@ import (
 	"context"
 	"fmt"
 	"log"
-
 	"os"
-	"shortener/cmd/web"
 
 	"github.com/redis/go-redis/v9"
 )
 
 func main() {
-    log.Println("Test running docker and connection to redis...")
+    log.Println("Telegram: Test running docker and connection to redis... qq")
 
 	redisHost := os.Getenv("REDIS_HOST")
 	redisPort := os.Getenv("REDIS_PORT")
@@ -29,8 +27,7 @@ func main() {
 		panic(err)
 	}
 
-    log.Println("Connected to the database")
-    web.Internal()
+    log.Println("Telegram: Connected to the database")
 
-    log.Println("##########################")
+    log.Println("Telegram: ##########################")
 }

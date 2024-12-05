@@ -1,0 +1,27 @@
+services:
+  redis:
+    ports:
+      - "6379:6379"
+
+  shortener-w:
+    build:
+      context: ../../
+      dockerfile: configs/docker/Dockerfile.w.dev
+    working_dir: /app
+    volumes:
+      - ../../:/app:cached
+      - go_mod_cache:/go/pkg/mod
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+
+volumes:
+  # db_data:
+  go_mod_cache:

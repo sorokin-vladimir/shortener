@@ -11,4 +11,4 @@ RUN go mod download
 
 EXPOSE 8080
 
-CMD ["air", "-c", ".air.toml"]
+CMD ["air", "-c", "./configs/air/.air-w.toml"]

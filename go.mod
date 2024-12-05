@@ -1,4 +1,4 @@
-module shortener
+module github.com/sorokin-vladimir/shortener
 
 go 1.23.2
 

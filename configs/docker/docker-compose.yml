@@ -9,20 +9,20 @@ services:
       timeout: 5s
       retries: 5
 
-  shortener:
-    build:
-      context: ../../
-      dockerfile: configs/docker/Dockerfile
-    depends_on:
-      redis:
-        condition: service_healthy
-    ports:
-      - "8080:8080"
-    networks:
-      - app_network
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
+  # shortener:
+  #   build:
+  #     context: ../../
+  #     dockerfile: configs/docker/Dockerfile
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - app_network
+  #   environment:
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: ${REDIS_PORT}
 
 # volumes:
 #   db_data:
