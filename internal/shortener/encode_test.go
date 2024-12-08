@@ -9,7 +9,7 @@ func TestBase56Encode(t *testing.T) {
 		name     string
 		number   uint64
 		expected string
-		_ string
+		_ 			 string
 	}{
 		{name: "encode zero", number: 0, expected: ""},
 		{name: "encode 1", number: 1, expected: "b"},
