@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/redis/go-redis/v9"
 )
 
 func StartServer(ctx context.Context, rdb *redis.Client) error {
