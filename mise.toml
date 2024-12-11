@@ -1,75 +1,39 @@
 [vars]
-DEV_WEB_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.w.yml"
-
-DEV_TELEGRAM_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.t.yml"
+DEV_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.yml"
 
 [tools]
 go = '1.23'
 
-[tasks.devw]
-description = "Run dev environment for Web"
-run = "docker compose {{vars.DEV_WEB_DOCKER_CONF}} up"
-
-[tasks.devt]
-description = "Run dev environment for Telegram"
-run = "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} up"
+[tasks.dev]
+description = "Run dev environment"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} up"
 
 [tasks.down]
-description = "Stop and remove all dev containers for Web and Telegram"
+description = "Stop and remove all dev containers"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} down"
+
+[tasks.rebuild]
+description = "Full rebuild with delete volumes"
 run = [
-  "docker compose {{vars.DEV_WEB_DOCKER_CONF}} down",
-  "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} down",
-]
-
-[tasks.downw]
-description = "Stop and remove all dev containers for Web"
-run = "docker compose {{vars.DEV_WEB_DOCKER_CONF}} down"
-
-[tasks.downt]
-description = "Stop and remove all dev containers for Telegram"
-run = "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} down"
-
-[tasks.rebuildw]
-description = "Full rebuild with delete volumes for Web"
-run = [
-  "docker compose {{vars.DEV_WEB_DOCKER_CONF}} down -v",
-  "docker compose {{vars.DEV_WEB_DOCKER_CONF}} up  --build --force-recreate",
-]
-
-[tasks.rebuildt]
-description = "Full rebuild with delete volumes for Telegram"
-run = [
-  "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} down -v",
-  "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} up  --build --force-recreate",
+  "docker compose {{vars.DEV_DOCKER_CONF}} down -v",
+  "docker compose {{vars.DEV_DOCKER_CONF}} up  --build --force-recreate",
 ]
 
 [tasks.logs]
 description = "Watch Docker logs"
 run = "docker compose logs -f"
 
-[tasks.testw]
-description = "Run Web tests inside container"
-run = "docker compose {{vars.DEV_WEB_DOCKER_CONF}} exec shortener-w go test ./..."
+[tasks.test]
+description = "Run tests inside container"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec shortener go test ./..."
 
-[tasks.testt]
-description = "Run Telegram tests inside container"
-run = "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} exec shortener-t go test ./..."
+[tasks.shell]
+description = "Connect to shell"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec shortener sh"
 
-[tasks.shellw]
-description = "Connect to Web shell"
-run = "docker compose {{vars.DEV_WEB_DOCKER_CONF}} exec shortener-w sh"
-
-[tasks.shellt]
-description = "Connect to Telegram shell"
-run = "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} exec shortener-t sh"
-
-[tasks.depsw]
-description = "Update dependencies for Web"
-run = "docker compose {{vars.DEV_WEB_DOCKER_CONF}} exec shortener-w go mod download"
-
-[tasks.depst]
-description = "Update dependencies for Telegram"
-run = "docker compose {{vars.DEV_TELEGRAM_DOCKER_CONF}} exec shortener-t go mod download"
+[tasks.deps]
+description = "Update dependencies"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec shortener go mod download"
 
 [tasks.build]
 run = 'echo "running build tasks"'
