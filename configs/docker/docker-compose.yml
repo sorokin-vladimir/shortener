@@ -21,7 +21,7 @@ services:
     networks:
       - app_network
     environment:
-      REDIS_HOST: redis
+      REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
 
 # volumes:

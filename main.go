@@ -34,21 +34,21 @@ func main() {
 
 	// Check the Redis connection
 	if err := rdb.Ping(ctx).Err(); err != nil {
-		log.Fatalf("Не удалось подключиться к Redis: %v", err)
+		log.Fatalf("Could not connect to Redis: %v", err)
 	}
-	fmt.Println("Подключение к Redis успешно установлено!")
+	fmt.Println("Connection to Redis is completed!")
 
 	// Run Web server
 	go func() {
 		if err := web.StartServer(ctx, rdb); err != nil {
-			log.Fatalf("Ошибка запуска веб-сервера: %v", err)
+			log.Fatalf("Error of the web-server running: %v", err)
 		}
 	}()
 
 	// Run Telegram bot
 	go func() {
 		if err := telegram.StartBot(ctx, rdb); err != nil {
-			log.Fatalf("Ошибка запуска Telegram-бота: %v", err)
+			log.Fatalf("Error of the Telegram-bot running: %v", err)
 		}
 	}()
 

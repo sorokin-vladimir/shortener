@@ -1,6 +1,8 @@
 [vars]
 DEV_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.yml"
 
+app_name = "shortener"
+
 [tools]
 go = '1.23'
 
@@ -25,15 +27,15 @@ run = "docker compose logs -f"
 
 [tasks.test]
 description = "Run tests inside container"
-run = "docker compose {{vars.DEV_DOCKER_CONF}} exec shortener go test ./..."
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} go test ./..."
 
 [tasks.shell]
 description = "Connect to shell"
-run = "docker compose {{vars.DEV_DOCKER_CONF}} exec shortener sh"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} sh"
 
 [tasks.deps]
 description = "Update dependencies"
-run = "docker compose {{vars.DEV_DOCKER_CONF}} exec shortener go mod download"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} go mod download"
 
 [tasks.build]
 run = 'echo "running build tasks"'
