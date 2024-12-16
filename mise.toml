@@ -27,7 +27,7 @@ run = "docker compose logs -f"
 
 [tasks.test]
 description = "Run tests inside container"
-run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} go test ./..."
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} go test ./... -v"
 
 [tasks.shell]
 description = "Connect to shell"

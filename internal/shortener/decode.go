@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Base56Decode(encodedString string) (uint64, error) {
+func Decode(encodedString string) (uint64, error) {
 	var number uint64
 	length := len(Alphabet)
 

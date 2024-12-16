@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"log"
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -11,8 +11,8 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/sorokin-vladimir/shortener/cmd/web"
 	"github.com/sorokin-vladimir/shortener/cmd/telegram"
+	"github.com/sorokin-vladimir/shortener/cmd/web"
 )
 
 func main() {
@@ -27,7 +27,7 @@ func main() {
 	redisAddr := fmt.Sprintf("%s:%s", redisHost, redisPort)
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: redisAddr,
+		Addr:     redisAddr,
 		Password: "", // Password Redis, if exists
 		DB:       0,
 	})
