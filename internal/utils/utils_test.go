@@ -46,3 +46,27 @@ func TestIsLocalhost(t *testing.T) {
 		})
 	}
 }
+
+func TestIsURL(t *testing.T) {
+	tests := []struct {
+		str      string
+		expected bool
+	}{
+		{"http://example.com/", true},
+		{"https://example.com/", true},
+		{"http://example.com", true},
+		{"http://example", true},
+		{"example.com", false},
+		{"example.com/", false},
+		{"example", false},
+	}
+
+	for _, tt := range tests {
+		t.Run("Is URL: "+tt.str, func(t *testing.T) {
+			result := IsURL(tt.str)
+			if result != tt.expected {
+				t.Errorf("IsURL(%s) = %t; expected %t", tt.str, result, tt.expected)
+			}
+		})
+	}
+}
