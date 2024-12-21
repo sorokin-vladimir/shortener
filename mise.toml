@@ -27,11 +27,19 @@ run = "docker compose logs -f"
 
 [tasks.test]
 description = "Run tests inside container"
-run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} go test ./... --cover"
+run = [
+  "mise rebuild -- -d",
+  "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} go test ./... --cover",
+  "mise down"
+]
 
 [tasks.shell]
 description = "Connect to shell"
 run = "docker compose {{vars.DEV_DOCKER_CONF}} exec {{vars.app_name}} sh"
+
+[tasks.redis]
+description = "Connect to Redis"
+run = "docker compose {{vars.DEV_DOCKER_CONF}} exec redis redis-cli"
 
 [tasks.deps]
 description = "Update dependencies"

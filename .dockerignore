@@ -2,3 +2,4 @@ configs/docker/
 
 .git/
 tmp/
+data/

@@ -2,6 +2,8 @@ services:
   redis:
     ports:
       - "6379:6379"
+    volumes:
+      - ../../data:/data
 
   shortener:
     build:
@@ -13,5 +15,5 @@ services:
       - go_mod_cache:/go/pkg/mod
 
 volumes:
-  # db_data:
+  # redis_data:
   go_mod_cache:
