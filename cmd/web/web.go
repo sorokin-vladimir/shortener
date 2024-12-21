@@ -2,7 +2,6 @@ package web
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,16 +11,7 @@ import (
 
 func StartServer(ctx context.Context, rdb *redis.Client) error {
 	log.SetPrefix("WEB | ")
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Example working with Redis
-		ctx := r.Context()
-		err := rdb.Set(ctx, "key", "value", 0).Err()
-		if err != nil {
-			http.Error(w, "Error working with Redis", http.StatusInternalServerError)
-			return
-		}
-		fmt.Fprintln(w, "Welcome to web interface!")
-	})
+	http.HandleFunc("/{url}", resoleShort)
 
 	port := os.Getenv("WEB_PORT")
 	server := &http.Server{Addr: ":" + port}

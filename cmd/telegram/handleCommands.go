@@ -22,6 +22,13 @@ func handleCommands(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		url, short, expiry := utils.GetArgs(update.Message.CommandArguments())
 		var msg tgbotapi.MessageConfig
 
+		if url == "" {
+			log.Printf("Did not provide an URL | User: %d", update.Message.From.ID)
+			msg = tgbotapi.NewMessage(update.Message.Chat.ID, "Looks like you've forgotten to pass an URL to shorten")
+			bot.Send(msg)
+			return
+		}
+
 		result := shortener.Shortener(
 			url,
 			"",

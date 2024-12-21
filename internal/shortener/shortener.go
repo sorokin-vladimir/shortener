@@ -72,6 +72,17 @@ func Shortener(
 		}
 	}
 
+	if len(url) < 4 {
+		log.Printf("Too short origin URL. Length is %d", len(url))
+		return ReturnType{
+			Short:          "",
+			expiry:         0,
+			remainingQuota: 0,
+			Err:            errors.New(utils.INVALID_URL_TOO_SHORT),
+			rateLimitReset: 0,
+		}
+	}
+
 	enforcedURL := utils.EnforceHTTP(url)
 	if !utils.IsURL(enforcedURL) {
 		log.Printf("Input string does not look like URL: %s. User: %s", enforcedURL, userID)
