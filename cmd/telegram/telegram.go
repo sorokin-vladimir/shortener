@@ -10,6 +10,7 @@ import (
 )
 
 func StartBot(ctx context.Context, rdb *redis.Client) error {
+	log.SetPrefix("TG | ")
 	apiKey := os.Getenv("TELEGRAM_API_KEY")
 	if apiKey == "" {
 		log.Fatal("TELEGRAM_API_KEY is not set up")
@@ -22,6 +23,8 @@ func StartBot(ctx context.Context, rdb *redis.Client) error {
 
 	log.Printf("Telegram bot is authorized as %s", bot.Self.UserName)
 
+	setupBotCommands(bot)
+
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 
@@ -32,20 +35,11 @@ func StartBot(ctx context.Context, rdb *redis.Client) error {
 		select {
 		case update := <-updates:
 			if update.Message != nil {
-				handleMessage(update.Message, bot, rdb)
+				handleCommands(bot, update)
 			}
 		case <-ctx.Done():
 			log.Println("Stopping Telegram bot...")
 			return nil
 		}
 	}
-}
-
-func handleMessage(msg *tgbotapi.Message, bot *tgbotapi.BotAPI, rdb *redis.Client) {
-	// Example message handling and working with Redis
-	text := msg.Text
-	log.Printf("[%s] %s", msg.From.UserName, text)
-
-	reply := tgbotapi.NewMessage(msg.Chat.ID, "Your message: "+text)
-	bot.Send(reply)
 }

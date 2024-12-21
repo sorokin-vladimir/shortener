@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/redis/go-redis/v9"
 )
 
 func StartServer(ctx context.Context, rdb *redis.Client) error {
+	log.SetPrefix("WEB | ")
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Example working with Redis
 		ctx := r.Context()
@@ -21,8 +23,8 @@ func StartServer(ctx context.Context, rdb *redis.Client) error {
 		fmt.Fprintln(w, "Welcome to web interface!")
 	})
 
-	// TODO: move port num into envs
-	server := &http.Server{Addr: ":8080"}
+	port := os.Getenv("WEB_PORT")
+	server := &http.Server{Addr: ":" + port}
 
 	// Run the server
 	go func() {
@@ -31,6 +33,6 @@ func StartServer(ctx context.Context, rdb *redis.Client) error {
 		server.Shutdown(ctx)
 	}()
 
-	log.Println("Web server is run on port: 8080")
+	log.Printf("Web server is run on port: %s", port)
 	return server.ListenAndServe()
 }
