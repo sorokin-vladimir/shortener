@@ -4,61 +4,47 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
-    name: Build and Test
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: 1.21
+    - name: Log in to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          go mod tidy
-          go mod download
+    - name: Build Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/shortener:latest -f configs/docker/Dockerfile.prod .
 
-      - name: Run tests
-        run: go test ./... -v
+    - name: Test Docker image
+      run: |
+        docker compose -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml up --abort-on-container-exit --exit-code-from shortener
 
-      # - name: Build Docker Image
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     push: false
-      #     tags: mydockerhubuser/myapp:latest
+    - name: Tag Docker image
+      run: |
+        docker tag ${{ secrets.DOCKER_USERNAME }}/shortener:latest ${{ secrets.DOCKER_USERNAME }}/shortener:${{ github.sha }}
 
-  # deploy:
-  #   name: Deploy to Production
-  #   runs-on: ubuntu-latest
-  #   needs: build
+    - name: Push Docker image to DockerHub
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/shortener:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/shortener:${{ github.sha }}
 
-  #   steps:
-  #     - name: Log in to Docker Hub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
+  publish:
+    runs-on: ubuntu-latest
 
-  #     - name: Push Docker Image
-  #       uses: docker/build-push-action@v4
-  #       with:
-  #         push: true
-  #         tags: mydockerhubuser/myapp:latest
+    needs: test
 
-  #     - name: Deploy via SSH
-  #       uses: appleboy/ssh-action@v0.1.8
-  #       with:
-  #         host: ${{ secrets.PROD_SERVER }}
-  #         username: ${{ secrets.PROD_USER }}
-  #         key: ${{ secrets.PROD_SSH_KEY }}
-  #         script: |
-  #           docker pull mydockerhubuser/myapp:latest
-  #           docker stop myapp || true
-  #           docker rm myapp || true
-  #           docker run -d --name myapp --network app_network -p 8080:8080 mydockerhubuser/myapp:latest
+    steps:
+    - name: Trigger Render Deploy
+      run: |
+        curl -X POST https://api.render.com/deploy/${{ secrets.RENDER_DEPLOY_HOOK }}

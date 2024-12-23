@@ -1,0 +1,16 @@
+services:
+  shortener:
+    build:
+      context: ../../
+      dockerfile: configs/docker/Dockerfile.prod
+    ports:
+      - "80:8080"
+      - "443:8080"
+    environment:
+      REDIS_URL: "rediss://${REDIS_HOST}:${REDIS_PORT}"
+
+volumes:
+  redis_data:
+
+networks:
+  app_network:

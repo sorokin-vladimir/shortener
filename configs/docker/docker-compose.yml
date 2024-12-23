@@ -25,7 +25,7 @@ services:
     environment:
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_URL: ""
       TELEGRAM_API_KEY: ${TELEGRAM_API_KEY}
       WEB_PORT: ${WEB_PORT}
       API_QUOTA: ${API_QUOTA}

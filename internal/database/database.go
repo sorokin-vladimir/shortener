@@ -17,11 +17,17 @@ var Ctx = context.Background()
 func CreateClient(dbNum int) *redis.Client {
 	host := os.Getenv("REDIS_HOST")
 	port := os.Getenv("REDIS_PORT")
-	password := os.Getenv("REDIS_PASSWORD")
+	redisUrl := os.Getenv("REDIS_URL")
+
+	var address string
+	if redisUrl == "" {
+		address = host + ":" + port
+	} else {
+		address = redisUrl
+	}
 
 	return redis.NewClient(&redis.Options{
-		Addr:     host + ":" + port,
-		Password: password,
-		DB:       dbNum,
+		Addr: address,
+		DB:   dbNum,
 	})
 }
