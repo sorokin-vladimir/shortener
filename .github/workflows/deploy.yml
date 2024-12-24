@@ -26,9 +26,20 @@ jobs:
       run: |
         docker build -t ${{ secrets.DOCKER_USERNAME }}/shortener:latest -f configs/docker/Dockerfile.prod .
 
+    - name: Create .env file for testing
+      run: |
+        echo "DOMAIN=${{ secrets.DOMAIN }}" > .env
+        echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env
+        echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env
+        echo "TELEGRAM_API_KEY=${{ secrets.TELEGRAM_API_KEY }}" >> .env
+        echo "WEB_PORT=${{ secrets.WEB_PORT }}" >> .env
+        echo "API_QUOTA=${{ secrets.API_QUOTA }}" >> .env
+        echo "EXPIRY_HOURS=${{ secrets.EXPIRY_HOURS }}" >> .env
+        echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
+
     - name: Test Docker image
       run: |
-        docker compose -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml up --abort-on-container-exit --exit-code-from shortener
+        docker compose --env-file .env -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml up --abort-on-container-exit --exit-code-from shortener
 
     - name: Tag Docker image
       run: |

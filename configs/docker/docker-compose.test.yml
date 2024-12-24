@@ -1,4 +1,4 @@
 services:
   shortener:
-    image: ${{ secrets.DOCKER_USERNAME }}/shortener:latest
+    image: ${DOCKER_USERNAME}/shortener:latest
     command: ["go", "test", "./...", "--cover"]
