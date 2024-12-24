@@ -1,4 +1,6 @@
 services:
   shortener:
-    image: ${DOCKER_USERNAME}/shortener:latest
+    build:
+      context: ../../
+      dockerfile: configs/docker/Dockerfile.test
     command: ["go", "test", "./...", "--cover"]
