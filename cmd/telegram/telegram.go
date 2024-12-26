@@ -6,11 +6,9 @@ import (
 	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/redis/go-redis/v9"
 )
 
-func StartBot(ctx context.Context, rdb *redis.Client) error {
-	log.SetPrefix("TG | ")
+func StartBot(ctx context.Context) error {
 	apiKey := os.Getenv("TELEGRAM_API_KEY")
 	if apiKey == "" {
 		log.Fatal("TELEGRAM_API_KEY is not set up")

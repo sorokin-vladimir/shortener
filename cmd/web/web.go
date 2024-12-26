@@ -5,13 +5,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/redis/go-redis/v9"
 )
 
-func StartServer(ctx context.Context, rdb *redis.Client) error {
-	log.SetPrefix("WEB | ")
-	http.HandleFunc("/{url}", resoleShort)
+func StartServer(ctx context.Context) error {
+	http.HandleFunc("/{url}", resolveShort)
 
 	port := os.Getenv("WEB_PORT")
 	server := &http.Server{Addr: ":" + port}

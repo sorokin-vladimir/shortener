@@ -8,15 +8,16 @@ import (
 	"github.com/sorokin-vladimir/shortener/internal/database"
 )
 
-func resoleShort(w http.ResponseWriter, r *http.Request) {
+func resolveShort(w http.ResponseWriter, r *http.Request) {
 	db_shorts := database.CreateClient(0)
 	defer db_shorts.Close()
 
-	value, err := db_shorts.Get(database.Ctx, r.PathValue("url")).Result()
+	url := r.PathValue("url")
+	value, err := db_shorts.Get(database.Ctx, url).Result()
 
 	if err == redis.Nil {
-		log.Printf("Short-URL '%s' not found", r.PathValue("url"))
-		http.Error(w, "short-url not found in db", http.StatusNotFound)
+		log.Printf("Could not resolve '%s'", url)
+		http.Error(w, "Could not resolve "+url, http.StatusNotFound)
 		return
 	} else if err != nil {
 		log.Println("Internal error", err)

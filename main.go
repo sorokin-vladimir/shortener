@@ -9,45 +9,34 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/redis/go-redis/v9"
-
 	"github.com/sorokin-vladimir/shortener/cmd/telegram"
 	"github.com/sorokin-vladimir/shortener/cmd/web"
+	"github.com/sorokin-vladimir/shortener/internal/database"
 )
 
 func main() {
-	log.Println("main func")
-
 	// Create a context for the management application
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	redisHost := os.Getenv("REDIS_HOST")
-	redisPort := os.Getenv("REDIS_PORT")
-	redisAddr := fmt.Sprintf("%s:%s", redisHost, redisPort)
-
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     redisAddr,
-		Password: "", // Password Redis, if exists
-		DB:       0,
-	})
+	db_shorts := database.CreateClient(0)
 
 	// Check the Redis connection
-	if err := rdb.Ping(ctx).Err(); err != nil {
+	if err := db_shorts.Ping(ctx).Err(); err != nil {
 		log.Fatalf("Could not connect to Redis: %v", err)
 	}
-	fmt.Println("Connection to Redis is completed!")
+	log.Println("Connection to Redis is completed!")
 
 	// Run Web server
 	go func() {
-		if err := web.StartServer(ctx, rdb); err != nil {
+		if err := web.StartServer(ctx); err != nil {
 			log.Fatalf("Error of the web-server running: %v", err)
 		}
 	}()
 
 	// Run Telegram bot
 	go func() {
-		if err := telegram.StartBot(ctx, rdb); err != nil {
+		if err := telegram.StartBot(ctx); err != nil {
 			log.Fatalf("Error of the Telegram-bot running: %v", err)
 		}
 	}()

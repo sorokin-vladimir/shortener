@@ -29,7 +29,6 @@ func Shortener(
 	customExpiry int,
 	customShort string,
 ) ReturnType {
-	log.SetPrefix("Shortener | ")
 	db_limits := database.CreateClient(database.DB_LIMITS)
 	defer db_limits.Close()
 
@@ -39,7 +38,7 @@ func Shortener(
 	} else {
 		userID = strconv.FormatInt(ID, 10)
 	}
-	log.Printf("Try to short URL: %s | User: %s", url, userID)
+	log.Printf("Shortener | URL: %s | User: %s", url, userID)
 
 	val, err := db_limits.Get(database.Ctx, userID).Result()
 	limit, _ := db_limits.TTL(database.Ctx, userID).Result()
@@ -108,7 +107,7 @@ func Shortener(
 
 	var id string
 	if customShort == "" {
-		id = encode(rand.Uint64())
+		id = encode(rand.Uint64(), db_limits)
 	} else {
 		log.Printf("Custom short is provided: %s. User: %s", customShort, userID)
 		id = customShort
@@ -156,11 +155,16 @@ func Shortener(
 
 	var domain string
 	if os.Getenv("DOMAIN") == "localhost" {
-		domain = os.Getenv("DOMAIN") + ":" + os.Getenv("WEB_PORT") + "/"
+		domain = os.Getenv("DOMAIN") + ":" + os.Getenv("WEB_PORT")
 	} else {
-		domain = os.Getenv("DOMAIN") + "/"
+		domain = os.Getenv("DOMAIN")
 	}
+	if domain[len(domain)-1:] != "/" {
+		domain += "/"
+	}
+	domain = utils.EnforceHTTP(domain)
 
+	log.Printf("Shortener | URL '%s' -> short '%s' | User: %s", url, domain+id, userID)
 	return ReturnType{
 		Short:          domain + id,
 		expiry:         expiryTimeDuration,
