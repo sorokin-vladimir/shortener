@@ -69,6 +69,5 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Trigger Render Deploy
-      run: echo "Mock for Render's hook"
-      # run: |
-      #   curl https://api.render.com/deploy/${{ secrets.RENDER_DEPLOY_HOOK }}
+      run: |
+        curl https://api.render.com/deploy/${{ secrets.RENDER_DEPLOY_HOOK }}
