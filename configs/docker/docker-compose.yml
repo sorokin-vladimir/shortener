@@ -27,7 +27,7 @@ services:
       REDIS_PORT: ${REDIS_PORT}
       REDIS_URL: ""
       TELEGRAM_API_KEY: ${TELEGRAM_API_KEY}
-      WEB_PORT: ${WEB_PORT}
+      PORT: ${PORT}
       API_QUOTA: ${API_QUOTA}
       DOMAIN: ${DOMAIN}
       EXPIRY_HOURS: ${EXPIRY_HOURS}

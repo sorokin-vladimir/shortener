@@ -155,7 +155,7 @@ func Shortener(
 
 	var domain string
 	if os.Getenv("DOMAIN") == "localhost" {
-		domain = os.Getenv("DOMAIN") + ":" + os.Getenv("WEB_PORT")
+		domain = os.Getenv("DOMAIN") + ":" + os.Getenv("PORT")
 	} else {
 		domain = os.Getenv("DOMAIN")
 	}
