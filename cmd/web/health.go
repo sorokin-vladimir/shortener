@@ -8,7 +8,7 @@ import (
 )
 
 func health(w http.ResponseWriter, _ *http.Request) {
-	db_shorts := database.CreateClient(0)
+	db_shorts := database.CreateClient(database.DB_SHORT)
 	defer db_shorts.Close()
 
 	keys, err := db_shorts.Keys(database.Ctx, "*").Result()

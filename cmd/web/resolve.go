@@ -9,7 +9,7 @@ import (
 )
 
 func resolveShort(w http.ResponseWriter, r *http.Request) {
-	db_shorts := database.CreateClient(0)
+	db_shorts := database.CreateClient(database.DB_SHORT)
 	defer db_shorts.Close()
 
 	url := r.PathValue("url")
@@ -25,7 +25,7 @@ func resolveShort(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db_limits := database.CreateClient(1)
+	db_limits := database.CreateClient(database.DB_LIMITS)
 	defer db_limits.Close()
 
 	_ = db_limits.Incr(database.Ctx, "counter")

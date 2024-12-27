@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"log"
 	"os"
 
 	"github.com/redis/go-redis/v9"
@@ -19,15 +20,22 @@ func CreateClient(dbNum int) *redis.Client {
 	port := os.Getenv("REDIS_PORT")
 	redisUrl := os.Getenv("REDIS_URL")
 
-	var address string
 	if redisUrl == "" {
-		address = host + ":" + port
-	} else {
-		address = redisUrl
+		address := host + ":" + port
+		return redis.NewClient(&redis.Options{
+			Addr: address,
+			DB:   dbNum,
+		})
 	}
 
+	opts, err := redis.ParseURL(redisUrl)
+	if err != nil {
+		log.Fatalf("Could not parse Redis URL: %v", err)
+	}
 	return redis.NewClient(&redis.Options{
-		Addr: address,
-		DB:   dbNum,
+		Addr:     opts.Addr,
+		Username: opts.Username,
+		Password: opts.Password,
+		DB:       dbNum,
 	})
 }

@@ -19,7 +19,7 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	db_shorts := database.CreateClient(0)
+	db_shorts := database.CreateClient(database.DB_SHORT)
 
 	// Check the Redis connection
 	if err := db_shorts.Ping(ctx).Err(); err != nil {
