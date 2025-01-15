@@ -1,6 +1,6 @@
 services:
   shortener:
     build:
-      context: ../../
+      context: ../../app/
       dockerfile: configs/docker/Dockerfile.test
     command: ["go", "test", "./...", "--cover"]

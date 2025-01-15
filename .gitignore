@@ -1,7 +1,6 @@
-/tmp
+app/tmp/
 .env.dev
 .env.test
 .env.prod
-/data
 /.vscode
 .DS_Store

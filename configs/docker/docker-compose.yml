@@ -13,7 +13,7 @@ services:
 
   shortener:
     build:
-      context: ../../
+      context: ../../app/
       dockerfile: configs/docker/Dockerfile
     depends_on:
       redis:

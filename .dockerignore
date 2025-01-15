@@ -1,5 +1,4 @@
 configs/docker/
 
 .git/
-tmp/
-data/
+app/tmp/
