@@ -27,8 +27,10 @@ jobs:
         echo "EXPIRY_HOURS=${{ secrets.EXPIRY_HOURS }}" >> .env
         echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
 
-    - name: Run tests with Docker Compose
+    - name: Install Mise
       uses: jdx/mise-action@v2
+
+    - name: Run tests with Docker Compose
       run : mise test
 
   build:
