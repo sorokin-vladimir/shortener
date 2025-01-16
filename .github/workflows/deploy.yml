@@ -18,14 +18,14 @@ jobs:
 
     - name: Create .env file for testing
       run: |
-        echo "DOMAIN=${{ secrets.DOMAIN }}" > .env
-        echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env
-        echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env
-        echo "TELEGRAM_API_KEY=${{ secrets.TELEGRAM_API_KEY }}" >> .env
-        echo "PORT=${{ secrets.PORT }}" >> .env
-        echo "API_QUOTA=${{ secrets.API_QUOTA }}" >> .env
-        echo "EXPIRY_HOURS=${{ secrets.EXPIRY_HOURS }}" >> .env
-        echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
+        echo "DOMAIN=${{ secrets.DOMAIN }}" > .env.test
+        echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env.test
+        echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env.test
+        echo "TELEGRAM_API_KEY=${{ secrets.TELEGRAM_API_KEY }}" >> .env.test
+        echo "PORT=${{ secrets.PORT }}" >> .env.test
+        echo "API_QUOTA=${{ secrets.API_QUOTA }}" >> .env.test
+        echo "EXPIRY_HOURS=${{ secrets.EXPIRY_HOURS }}" >> .env.test
+        echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env.test
 
     - name: Install Mise
       uses: jdx/mise-action@v2

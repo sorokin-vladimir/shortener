@@ -1,6 +1,6 @@
 [vars]
 DEV_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.dev.yml"
-TEST_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml"
+TEST_DOCKER_CONF = "--env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml"
 
 app_name = "shortener"
 
