@@ -15,6 +15,23 @@ services:
       - ../../app:/app:cached
       - go_mod_cache:/go/pkg/mod
 
+  client:
+    build:
+      context: ../../client/
+      dockerfile: configs/docker/Dockerfile.dev
+    volumes:
+      - ../../client:/app:cached
+    ports:
+      - "5173:5173"
+    # environment:
+      # REACT_APP_API_URL: http://localhost:8080
+
+  nginx:
+    volumes:
+      - ../../configs/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+
 volumes:
   # redis_data:
   go_mod_cache:

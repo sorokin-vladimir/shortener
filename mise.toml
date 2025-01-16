@@ -18,7 +18,7 @@ run = "docker compose {{vars.DEV_DOCKER_CONF}} down"
 description = "Full rebuild with delete volumes"
 run = [
   "docker compose {{vars.DEV_DOCKER_CONF}} down -v",
-  "docker compose {{vars.DEV_DOCKER_CONF}} up  --build --force-recreate",
+  "docker compose {{vars.DEV_DOCKER_CONF}} up --build --force-recreate",
 ]
 
 [tasks.logs]

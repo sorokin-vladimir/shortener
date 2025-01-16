@@ -1,0 +1,14 @@
+{
+  "name": "client-shortener",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npx vite --host",
+    "build": "npx vite build",
+    "preview": "npx vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.7"
+  }
+}

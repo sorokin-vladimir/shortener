@@ -32,6 +32,25 @@ services:
       DOMAIN: ${DOMAIN}
       EXPIRY_HOURS: ${EXPIRY_HOURS}
 
+  client:
+    build:
+      context: ../../client/
+      dockerfile: configs/docker/Dockerfile
+    # volumes:
+    #   - ./client:/app:cached
+    networks:
+      - app_network
+    # environment:
+      # REACT_APP_API_URL: http://localhost:8080
+
+  nginx:
+    image: nginx:1.26.2-perl
+    networks:
+      - app_network
+    depends_on:
+      - client
+      - shortener
+
 volumes:
   redis_data:
 
