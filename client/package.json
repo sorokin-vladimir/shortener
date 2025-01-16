@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx vite --host",
     "build": "npx vite build",
-    "preview": "npx vite preview"
+    "preview": "npx vite preview",
+    "test": "echo 'There is no tests yet'"
   },
   "devDependencies": {
     "vite": "^6.0.7"

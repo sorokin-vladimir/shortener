@@ -3,6 +3,7 @@ DEV_DOCKER_CONF = "--env-file .env.dev -f configs/docker/docker-compose.yml -f c
 TEST_DOCKER_CONF = "--env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml"
 
 app_name = "shortener"
+client_name = "client"
 
 [tools]
 go = '1.23'
@@ -12,8 +13,11 @@ description = "Run dev environment"
 run = "docker compose {{vars.DEV_DOCKER_CONF}} up"
 
 [tasks.down]
-description = "Stop and remove all dev containers"
-run = "docker compose {{vars.DEV_DOCKER_CONF}} down"
+description = "Stop and remove all dev and test containers"
+run = [
+  "docker compose {{vars.DEV_DOCKER_CONF}} down",
+  "docker compose {{vars.TEST_DOCKER_CONF}} down",
+]
 
 [tasks.rebuild]
 description = "Full rebuild with delete volumes"
@@ -31,7 +35,8 @@ description = "Run tests inside container"
 run = [
   "docker compose {{vars.TEST_DOCKER_CONF}} up --build --force-recreate -d",
   "docker compose {{vars.TEST_DOCKER_CONF}} exec {{vars.app_name}} go test ./... --cover",
-  "docker compose {{vars.TEST_DOCKER_CONF}} down"
+  "docker compose {{vars.TEST_DOCKER_CONF}} exec {{vars.client_name}} npm run test",
+  "docker compose {{vars.TEST_DOCKER_CONF}} down",
 ]
 
 [tasks.shell]

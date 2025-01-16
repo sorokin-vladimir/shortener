@@ -3,4 +3,10 @@ services:
     build:
       context: ../../app/
       dockerfile: configs/docker/Dockerfile.test
-    command: ["go", "test", "./...", "--cover"]
+    command: ["go", "run", "main.go"]
+
+  client:
+    build:
+      context: ../../client/
+      dockerfile: configs/docker/Dockerfile.test
+    command: ["npm", "run", "dev"]
