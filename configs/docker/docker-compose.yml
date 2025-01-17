@@ -10,6 +10,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    profiles:
+      - dev
+      - test
+      - prod
 
   shortener:
     build:
@@ -18,8 +22,6 @@ services:
     depends_on:
       redis:
         condition: service_healthy
-    ports:
-      - "8080:8080"
     networks:
       - app_network
     environment:
@@ -31,17 +33,23 @@ services:
       API_QUOTA: ${API_QUOTA}
       DOMAIN: ${DOMAIN}
       EXPIRY_HOURS: ${EXPIRY_HOURS}
+    profiles:
+      - dev
+      - test
+      - prod
 
   client:
     build:
       context: ../../client/
       dockerfile: configs/docker/Dockerfile
-    # volumes:
-    #   - ./client:/app:cached
     networks:
       - app_network
     # environment:
       # REACT_APP_API_URL: http://localhost:8080
+    profiles:
+      - dev
+      - test
+      - prod
 
   nginx:
     image: nginx:1.26.2-perl
@@ -50,6 +58,9 @@ services:
     depends_on:
       - client
       - shortener
+    profiles:
+      - dev
+      - prod
 
 volumes:
   redis_data:

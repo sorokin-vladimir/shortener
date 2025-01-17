@@ -16,12 +16,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Create .env file for testing
+    - name: Create .env.test file for testing
       run: |
         echo "DOMAIN=${{ secrets.DOMAIN }}" > .env.test
         echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> .env.test
         echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env.test
-        echo "TELEGRAM_API_KEY=${{ secrets.TELEGRAM_API_KEY }}" >> .env.test
+        echo "TELEGRAM_API_KEY=qwerty" >> .env.test
         echo "PORT=${{ secrets.PORT }}" >> .env.test
         echo "API_QUOTA=${{ secrets.API_QUOTA }}" >> .env.test
         echo "EXPIRY_HOURS=${{ secrets.EXPIRY_HOURS }}" >> .env.test

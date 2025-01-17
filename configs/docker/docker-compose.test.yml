@@ -1,4 +1,6 @@
 services:
+  nginx: {}
+
   shortener:
     build:
       context: ../../app/
