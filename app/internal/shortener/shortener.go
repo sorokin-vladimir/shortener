@@ -153,12 +153,7 @@ func Shortener(
 
 	remainingQuota, _ := db_limits.Decr(database.Ctx, userID).Result()
 
-	var domain string
-	if os.Getenv("DOMAIN") == "localhost" {
-		domain = os.Getenv("DOMAIN") + ":" + os.Getenv("PORT")
-	} else {
-		domain = os.Getenv("DOMAIN")
-	}
+	domain := os.Getenv("DOMAIN")
 	if domain[len(domain)-1:] != "/" {
 		domain += "/"
 	}
