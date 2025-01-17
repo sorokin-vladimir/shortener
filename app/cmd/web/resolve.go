@@ -6,9 +6,17 @@ import (
 
 	"github.com/redis/go-redis/v9"
 	"github.com/sorokin-vladimir/shortener/internal/database"
+	"github.com/sorokin-vladimir/shortener/internal/utils"
 )
 
 func resolveShort(w http.ResponseWriter, r *http.Request) {
+	errMethod := utils.CheckHttpMethod(r.Method, http.MethodGet)
+	if errMethod != nil {
+		http.Error(w, errMethod.Error(), http.StatusMethodNotAllowed)
+		log.Println(errMethod.Error())
+		return
+	}
+
 	db_shorts := database.CreateClient(database.DB_SHORT)
 	defer db_shorts.Close()
 
