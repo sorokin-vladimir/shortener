@@ -4,15 +4,23 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
-  background-color: gray;
+  background-color: hsl(0, 0%, 96%);
+  color: hsl(0, 0%, 10%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/*
+hsl(108,48.84%,42.16%)
+hsl(108,49.3%,72.16%)
+hsl(107.65,50%,86.67%)
+hsl(77.65,50%,86.67%)
+hsl(77.14,49.3%,72.16%)
+hsl(77.14,48.84%,42.16%)
+ */
 
 a {
   font-weight: 500;
@@ -25,17 +33,51 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: grid;
+  grid-template-rows: 100px 1fr 50px;
   min-width: 320px;
+  width: 100vw;
   min-height: 100vh;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body > * {
+  padding: 0 10px;
+}
+
+header {
+  padding-top: 10px;
+  background-color: hsl(108,48.84%,42.16%);
+}
+
+main {
+  padding-top: 10px;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+}
+
+.form {
+  align-self: end;
+  justify-self: center;
+  padding-bottom: 10px;
+}
+
+.content {
+  align-self: top;
+  justify-self: center;
+  padding-top: 10px;
+}
+
+.content .short {
+
+}
+
+.content .copy-short {
+  margin-left: 10px;
+}
+
+footer {
+  background-color: hsl(108,48.84%,22.16%);
+  color: hsl(0, 0%, 96%);
 }
 
 @media (prefers-color-scheme: light) {
