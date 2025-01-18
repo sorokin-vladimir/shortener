@@ -13,7 +13,7 @@ RUN go build -o app main.go
 
 # Stage 3: Nginx
 FROM nginx:1.26.2-perl AS proxy
-COPY ./configs/nginx/nginx.prod.template.conf /etc/nginx/nginx.template.conf
+COPY ./configs/nginx/nginx.templ.prod.conf /etc/nginx/nginx.template.conf
 COPY --from=backend /app /app
 RUN apk add --no-cache gettext
 
