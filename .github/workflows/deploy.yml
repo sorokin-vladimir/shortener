@@ -37,7 +37,7 @@ jobs:
 
     - name: Run backend tests
       run: |
-        docker compose --env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml exec shortener go test ./... --cover
+        docker compose --env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml exec shortener go test -p=1 ./... --cover
 
     - name: Run frontend tests
       run: |
