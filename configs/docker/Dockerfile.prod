@@ -9,7 +9,7 @@ FROM golang:1.23-alpine AS backend
 WORKDIR /app
 COPY ./app .
 COPY --from=frontend /app/dist ./static
-RUN go build -o app main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o app main.go
 
 # Stage 3: Nginx
 FROM nginx:1.26.2-perl AS proxy

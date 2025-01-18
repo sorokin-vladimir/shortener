@@ -64,7 +64,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/shortener:latest -f app/configs/docker/Dockerfile.prod ./app/
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/shortener:latest -f configs/docker/Dockerfile.prod .
 
     - name: Tag Docker image
       run: |
