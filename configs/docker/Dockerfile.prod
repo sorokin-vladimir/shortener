@@ -13,6 +13,8 @@ RUN go build -o app main.go
 
 # Stage 3: Nginx
 FROM nginx:1.26.2-perl AS proxy
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends gettext-base && rm -rf /var/lib/apt/lists/*
 COPY ./configs/nginx/nginx.templ.prod.conf /etc/nginx/nginx.template.conf
 COPY --from=backend /app /app
 
