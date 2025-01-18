@@ -28,11 +28,24 @@ jobs:
         echo "API_QUOTA=100" >> .env.test
         echo "EXPIRY_HOURS=100" >> .env.test
 
-    - name: Install Mise
-      uses: jdx/mise-action@v2
+    - name: Start services
+      run: |
+        docker compose --env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml --profile test up --build --force-recreate -d
 
-    - name: Run tests with Docker Compose
-      run : mise test
+    - name: Wait for services
+      run: sleep 10
+
+    - name: Run backend tests
+      run: |
+        docker compose --env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml exec shortener go test ./... --cover
+
+    - name: Run frontend tests
+      run: |
+        docker compose --env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml exec client npm run test
+
+    - name: Stop services
+      run: |
+        docker compose --env-file .env.test -f configs/docker/docker-compose.yml -f configs/docker/docker-compose.test.yml down
 
   Build:
     runs-on: ubuntu-latest
