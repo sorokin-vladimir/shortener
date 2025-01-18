@@ -9,9 +9,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/sorokin-vladimir/shortener/cmd/telegram"
+	// "github.com/sorokin-vladimir/shortener/cmd/telegram"
 	"github.com/sorokin-vladimir/shortener/cmd/web"
-	"github.com/sorokin-vladimir/shortener/internal/database"
+	// "github.com/sorokin-vladimir/shortener/internal/database"
 )
 
 func main() {
@@ -19,13 +19,13 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	db_shorts := database.CreateClient(database.DB_SHORT)
+	// db_shorts := database.CreateClient(database.DB_SHORT)
 
-	// Check the Redis connection
-	if err := db_shorts.Ping(ctx).Err(); err != nil {
-		log.Fatalf("Could not connect to Redis: %v", err)
-	}
-	log.Println("Connection to Redis is completed!")
+	// // Check the Redis connection
+	// if err := db_shorts.Ping(ctx).Err(); err != nil {
+	// 	log.Fatalf("Could not connect to Redis: %v", err)
+	// }
+	// log.Println("Connection to Redis is completed!")
 
 	// Run Web server
 	go func() {
@@ -35,11 +35,11 @@ func main() {
 	}()
 
 	// Run Telegram bot
-	go func() {
-		if err := telegram.StartBot(ctx); err != nil {
-			log.Fatalf("Error of the Telegram-bot running: %v", err)
-		}
-	}()
+	// go func() {
+	// 	if err := telegram.StartBot(ctx); err != nil {
+	// 		log.Fatalf("Error of the Telegram-bot running: %v", err)
+	// 	}
+	// }()
 
 	// Waiting shutdown signal
 	waitForShutdown(cancel)
