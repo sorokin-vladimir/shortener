@@ -33,7 +33,6 @@ run = "docker compose logs -f"
 [tasks.test]
 description = "Run tests inside container"
 run = [
-  "mise down",
   "docker compose {{vars.TEST_DOCKER_CONF}} --profile test up --build --force-recreate -d",
   "docker compose {{vars.TEST_DOCKER_CONF}} exec {{vars.app_name}} go test ./... --cover",
   "docker compose {{vars.TEST_DOCKER_CONF}} exec {{vars.client_name}} npm run test",

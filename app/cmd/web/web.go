@@ -12,7 +12,7 @@ func StartServer(ctx context.Context) error {
 	http.HandleFunc("/health", health)
 	http.HandleFunc("/short", short)
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("WEB_PORT")
 	server := &http.Server{Addr: ":" + port}
 
 	// Run the server

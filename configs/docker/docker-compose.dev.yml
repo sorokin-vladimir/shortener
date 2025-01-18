@@ -1,7 +1,7 @@
 services:
   redis:
     ports:
-      - "6379:6379"
+      - ${REDIS_PORT}:${REDIS_PORT}
     volumes:
       - ../../app/tmp:/data
       # - redis_data:/data
@@ -12,7 +12,7 @@ services:
       dockerfile: configs/docker/Dockerfile.dev
     working_dir: /app
     ports:
-      - "8080:8080"
+      - ${WEB_PORT}:${WEB_PORT}
     volumes:
       - ../../app:/app:cached
       - go_mod_cache:/go/pkg/mod
@@ -23,16 +23,19 @@ services:
       dockerfile: configs/docker/Dockerfile.dev
     volumes:
       - ../../client:/app:cached
+      - /app/node_modules
     ports:
-      - "5173:5173"
+      - ${CLIENT_PORT}:${CLIENT_PORT}
     # environment:
       # REACT_APP_API_URL: http://localhost:8080
 
   nginx:
     volumes:
-      - ../../configs/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+      - ../../configs/nginx/nginx.templ.dev.conf:/etc/nginx/nginx.template.conf:ro
+      - ../../configs/nginx/entrypoint.sh:/entrypoint.sh:ro
     ports:
-      - "80:80"
+      - ${PORT}:${PORT}
+
 
 volumes:
   # redis_data:

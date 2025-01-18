@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  Test:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,8 @@ jobs:
         echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env.test
         echo "TELEGRAM_API_KEY=qwerty" >> .env.test
         echo "PORT=${{ secrets.PORT }}" >> .env.test
+        echo "WEB_PORT=${{ secrets.WEB_PORT }}" >> .env.test
+        echo "CLIENT_PORT=${{ secrets.CLIENT_PORT }}" >> .env.test
         echo "API_QUOTA=${{ secrets.API_QUOTA }}" >> .env.test
         echo "EXPIRY_HOURS=${{ secrets.EXPIRY_HOURS }}" >> .env.test
         echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env.test
@@ -33,10 +35,10 @@ jobs:
     - name: Run tests with Docker Compose
       run : mise test
 
-  build:
+  Build:
     runs-on: ubuntu-latest
 
-    needs: test
+    needs: Test
 
     steps:
     - name: Checkout repository
