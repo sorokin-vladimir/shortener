@@ -13,7 +13,8 @@ RUN go build -o app main.go
 
 # Stage 3: Nginx
 FROM nginx:1.26.2-perl AS proxy
-COPY ./configs/nginx/nginx.prod.conf /etc/nginx/nginx.conf
+COPY ./configs/nginx/nginx.prod.template.conf /etc/nginx/nginx.template.conf
 COPY --from=backend /app /app
+RUN apk add --no-cache gettext
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/sh", "-c", "envsubst '${PORT},${WEB_PORT},${CLIENT_PORT}' < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
