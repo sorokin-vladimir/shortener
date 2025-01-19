@@ -19,4 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends gettext-base &&
 COPY ./configs/nginx/nginx.templ.prod.conf /etc/nginx/nginx.template.conf
 COPY --from=backend /app /app
 
-CMD ["/bin/sh", "-c", "envsubst '${PORT},${WEB_PORT},${CLIENT_PORT}' < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
+COPY ./configs/startup.sh /app/startup.sh
+RUN chmod +x /app/startup.sh
+
+# CMD ["/bin/sh", "-c", "envsubst '${PORT},${WEB_PORT},${CLIENT_PORT}' < /etc/nginx/nginx.template.conf > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
+CMD ["/app/startup.sh"]
