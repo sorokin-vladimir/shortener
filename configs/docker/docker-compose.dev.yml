@@ -4,7 +4,6 @@ services:
       - ${REDIS_PORT}:${REDIS_PORT}
     volumes:
       - ../../app/tmp:/data
-      # - redis_data:/data
 
   shortener:
     build:
@@ -26,8 +25,6 @@ services:
       - /app/node_modules
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
-    # environment:
-      # REACT_APP_API_URL: http://localhost:8080
 
   nginx:
     volumes:
@@ -35,8 +32,8 @@ services:
       - ../../configs/nginx/entrypoint.sh:/entrypoint.sh:ro
     ports:
       - ${PORT}:${PORT}
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
 
 
 volumes:
-  # redis_data:
   go_mod_cache:

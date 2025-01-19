@@ -65,7 +65,6 @@ services:
     profiles:
       - dev
       - prod
-    entrypoint: ["/bin/sh", "/entrypoint.sh"]
 
 volumes:
   redis_data:

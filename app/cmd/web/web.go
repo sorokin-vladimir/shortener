@@ -8,9 +8,9 @@ import (
 )
 
 func StartServer(ctx context.Context) error {
-	// http.HandleFunc("/{url}", resolveShort)
+	http.HandleFunc("/{url}", resolveShort)
 	http.HandleFunc("/health", health)
-	// http.HandleFunc("/short", short)
+	http.HandleFunc("/short", short)
 
 	port := os.Getenv("WEB_PORT")
 	server := &http.Server{Addr: ":" + port}
