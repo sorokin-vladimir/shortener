@@ -14,7 +14,7 @@ document.body.addEventListener("htmx:afterSettle", function(event) {
 
 function copyHandler() {
   if (!navigator.clipboard) {
-    const input = document.getElementById("short-input");
+    const input = document.getElementById("short");
     input.select();
     input.setSelectionRange(0, input.value.length);
 
@@ -27,6 +27,6 @@ function copyHandler() {
     return;
   }
 
-  const textToCopy = document.getElementById("short").textContent;
+  const textToCopy = document.getElementById("short").value;
   navigator.clipboard.writeText(textToCopy)
 }
