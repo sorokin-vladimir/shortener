@@ -105,16 +105,16 @@ func Shortener(
 		}
 	}
 
+	db_shorts := database.CreateClient(database.DB_SHORT)
+	defer db_shorts.Close()
+
 	var id string
 	if customShort == "" {
-		id = encode(rand.Uint64(), db_limits)
+		id = encode(rand.Uint64(), db_shorts)
 	} else {
 		log.Printf("Custom short is provided: %s. User: %s", customShort, userID)
 		id = customShort
 	}
-
-	db_shorts := database.CreateClient(database.DB_SHORT)
-	defer db_shorts.Close()
 
 	val, _ = db_shorts.Get(database.Ctx, id).Result()
 

@@ -20,12 +20,12 @@ func resolveShort(w http.ResponseWriter, r *http.Request) {
 	db_shorts := database.CreateClient(database.DB_SHORT)
 	defer db_shorts.Close()
 
-	url := r.PathValue("url")
-	value, err := db_shorts.Get(database.Ctx, url).Result()
+	short := r.PathValue("short")
+	value, err := db_shorts.Get(database.Ctx, short).Result()
 
 	if err == redis.Nil {
-		log.Printf("Could not resolve '%s'", url)
-		http.Error(w, "Could not resolve "+url, http.StatusNotFound)
+		log.Printf("Could not resolve '%s'", short)
+		http.Error(w, "Could not resolve "+short, http.StatusNotFound)
 		return
 	} else if err != nil {
 		log.Println("Internal error", err)
@@ -38,5 +38,6 @@ func resolveShort(w http.ResponseWriter, r *http.Request) {
 
 	_ = db_limits.Incr(database.Ctx, "counter")
 
+	log.Printf("Resolved '%s' to '%s'", short, value)
 	http.Redirect(w, r, value, http.StatusSeeOther)
 }

@@ -8,7 +8,7 @@ import (
 )
 
 func StartServer(ctx context.Context) error {
-	http.HandleFunc("/{url}", resolveShort)
+	http.HandleFunc("/{short}", resolveShort)
 	http.HandleFunc("/health", health)
 	http.HandleFunc("/short", short)
 
