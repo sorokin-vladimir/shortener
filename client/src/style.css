@@ -92,6 +92,13 @@ main {
 
 .icon-cut {
   transform: rotateZ(-135deg);
+  fill: #000;
+}
+
+.icon-cut g {
+  stroke-width: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .content {
@@ -134,6 +141,8 @@ footer {
 }
 
 .htmx-indicator{
+  fill: none;
+  stroke-width: 0;
   display: none;
   -webkit-animation: rotating 1s linear infinite;
   -moz-animation: rotating 1s linear infinite;
@@ -146,6 +155,33 @@ footer {
 }
 .htmx-request .icon-cut{
   display: none;
+}
+
+.htmx-indicator g {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.htmx-indicator path {
+  stroke: #000;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.icon-copy {
+  fill: none;
+}
+
+.icon-copy g {
+  stroke-width: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-copy path {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #080341;
 }
 
 @media (max-width: 700px) {
