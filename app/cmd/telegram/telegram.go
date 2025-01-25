@@ -33,7 +33,11 @@ func StartBot(ctx context.Context) error {
 		select {
 		case update := <-updates:
 			if update.Message != nil {
-				handleCommands(bot, update)
+				if update.Message.IsCommand() {
+					handleCommands(bot, update)
+				} else if update.Message.Text != "" {
+					handleMessage(bot, update)
+				}
 			}
 		case <-ctx.Done():
 			log.Println("Stopping Telegram bot...")
