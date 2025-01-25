@@ -49,12 +49,13 @@ func short(w http.ResponseWriter, r *http.Request) {
 		"",
 	)
 
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
 	if result.Err != nil {
-		http.Error(w, result.Err.Error(), http.StatusInternalServerError)
-		log.Println(result.Err)
+		handleError(result.Err, w)
+		return
 	}
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	fmt.Fprintf(w, `
 		<span class="short-arrow">-></span>
 		<input type="text" id="short" value="%s" class="input-short" />

@@ -2,21 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shortener</title>
+    <title>cuter.me | URL Shortener</title>
     <link rel="stylesheet" type="text/css" href="/src/style.css">
   </head>
   <body>
 
     <main>
-      <!-- <div>Cut Shorter</div> -->
-      <form hx-post="/short" hx-trigger="submit" hx-target="#partial-content" class="form">
-        <input id="url" name="url" type="text" class="input-url" placeholder="Put your long URL here..." autofocus autocomplete="off">
-        <button type="submit" class="button-cut" hx-indicator="#indicator" aria-label="Cut the URL">
-          <svg class="icon-cut" height="1.9rem" width="1.9rem" version="1.1" id="XMLID_258_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <g id="cut"> <g> <path d="M4.5,24C2,24,0,22,0,19.5S2,15,4.5,15c1,0,1.9,0.3,2.7,0.9l4.7-3.9L7.2,8.1C6.5,8.7,5.5,9,4.5,9C2,9,0,7,0,4.5S2,0,4.5,0 S9,2,9,4.5C9,5.3,8.8,6,8.5,6.6l4.9,4.1l9-7.5l1.3,1.5L15,12l8.7,7.2l-1.3,1.5l-9-7.5l-4.9,4.1C8.8,17.9,9,18.6,9,19.4 C9,22,7,24,4.5,24z M4.5,17C3.1,17,2,18.1,2,19.5S3.1,22,4.5,22S7,20.9,7,19.5S5.9,17,4.5,17z M4.5,2C3.1,2,2,3.1,2,4.5 S3.1,7,4.5,7S7,5.9,7,4.5S5.9,2,4.5,2z"></path> </g> </g> </g></svg>
+      <div class="logo-container">
+        <svg class="logo" width="208" height="51" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <title>Cut Shorter</title>
+            <text class="logo-t" xml:space="preserve" font-size="68" id="svg_1" y="50.14046" x="57.07794">T</text>
+            <text class="logo-cu" xml:space="preserve" font-size="38" id="svg_2" y="29.26094" x="0">CU</text>
+            <text class="logo-shor" font-weight="normal" xml:space="preserve" font-size="28" id="svg_3" y="50.14046" x="0">shor</text>
+            <text class="logo-er" xml:space="preserve" font-size="48" id="svg_4" y="50.05612" x="98.43774">ER</text>
+            <text class="logo-me" xml:space="preserve" font-size="28" id="svg_5" y="50.05612" x="159.41341">.me</text>
+          </g>
+        </svg>
 
-          <svg class="htmx-indicator" width="1.9rem" height="1.9rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path d="M12 3C10.22 3 8.47991 3.52784 6.99987 4.51677C5.51983 5.50571 4.36628 6.91131 3.68509 8.55585C3.0039 10.2004 2.82567 12.01 3.17294 13.7558C3.5202 15.5016 4.37737 17.1053 5.63604 18.364C6.89472 19.6226 8.49836 20.4798 10.2442 20.8271C11.99 21.1743 13.7996 20.9961 15.4442 20.3149C17.0887 19.6337 18.4943 18.4802 19.4832 17.0001C20.4722 15.5201 21 13.78 21 12"></path> <path d="M19.7942 7.5C19.8905 7.66673 19.9813 7.83651 20.0667 8.00907"></path> </g></svg>
+        <div class="logo-title">
+          cut shorter, share simpler
+          <br/>
+          <span class="logo-subtitle">No fees. No registration. No tracking</span>
+        </div>
+
+      </div>
+      <form hx-post="/short" hx-trigger="submit" hx-target="#partial-content" class="form">
+        <input id="url" name="url" type="text" class="input-url" placeholder="Put your long link here..." autofocus autocomplete="off">
+        <button type="submit" class="button-cut" hx-indicator="#indicator" aria-label="Cut the URL">
+          <svg class="icon-cut" width="2.5rem" height="2.5rem" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <title>CutShorter</title> <g id="Page-1"> <g id="Combined-Shape"> <path d="M75.8186667,0.1344 L293.482667,271.323733 C307.392,261.9584 323.541333,257.0304 340.266667,257.0304 C386.730667,257.0304 424.533333,294.811733 424.533333,341.297067 C424.533333,387.7824 386.730667,425.563733 340.266667,425.563733 C293.802667,425.563733 256,387.7824 256,341.297067 C256,327.857067 259.413333,314.651733 266.154667,302.0224 L266.154667,302.0224 L212.288,234.673067 L158.4,302.065067 C165.141333,314.6944 168.533333,327.8784 168.533333,341.297067 C168.533333,387.7824 130.730667,425.563733 84.2666667,425.563733 C37.8026667,425.563733 7.10542736e-15,387.7824 7.10542736e-15,341.297067 C7.10542736e-15,294.811733 37.8026667,257.0304 84.2666667,257.0304 C100.992,257.0304 117.162667,261.9584 131.093333,271.345067 L131.093333,271.345067 L186.432,202.353067 L61.1626667,45.9157333 L75.8186667,0.1344 Z M340.266667,297.563733 C316.16,297.563733 296.533333,317.1904 296.533333,341.297067 C296.533333,365.403733 316.16,385.0304 340.266667,385.0304 C364.373333,385.0304 384,365.403733 384,341.297067 C384,317.1904 364.373333,297.563733 340.266667,297.563733 Z M84.2666667,297.563733 C60.16,297.563733 40.5333333,317.1904 40.5333333,341.297067 C40.5333333,365.403733 60.16,385.0304 84.2666667,385.0304 C108.373333,385.0304 128,365.403733 128,341.297067 C128,317.1904 108.373333,297.563733 84.2666667,297.563733 Z M348.9024,7.10542736e-15 L363.537067,45.7813333 L267.345067,165.866667 L241.531733,133.696 L242.065067,133.034667 L348.9024,7.10542736e-15 Z"> </path> </g> </g> </g></svg>
+
+          <svg class="htmx-indicator" width="2.5rem" height="2.5rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path d="M12 3C10.22 3 8.47991 3.52784 6.99987 4.51677C5.51983 5.50571 4.36628 6.91131 3.68509 8.55585C3.0039 10.2004 2.82567 12.01 3.17294 13.7558C3.5202 15.5016 4.37737 17.1053 5.63604 18.364C6.89472 19.6226 8.49836 20.4798 10.2442 20.8271C11.99 21.1743 13.7996 20.9961 15.4442 20.3149C17.0887 19.6337 18.4943 18.4802 19.4832 17.0001C20.4722 15.5201 21 13.78 21 12"></path> <path d="M19.7942 7.5C19.8905 7.66673 19.9813 7.83651 20.0667 8.00907"></path> </g></svg>
         </button>
       </form>
 
@@ -24,7 +42,18 @@
       <div id="partial-content" class="content"></div>
     </main>
 
-    <footer></footer>
+    <footer>
+      <span>© 2025 Cuter.me</span>
+      <div class="footer-links">
+        <a href="https://github.com/sorokin-vladimir/shortener" target="_blank" rel="noopener noreferrer">
+          <svg width="2rem" height="2rem" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>github [#142]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399" id="github-[#142]"> </path> </g> </g> </g> </g></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sorokin-vladimir/" target="_blank" rel="noopener noreferrer">
+          <svg fill="#000000" height="2rem" width="2rem" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M113,145c-141.4,0-256,114.6-256,256s114.6,256,256,256s256-114.6,256-256S254.4,145,113,145z M41.4,508.1H-8.5V348.4h49.9 V508.1z M15.1,328.4h-0.4c-18.1,0-29.8-12.2-29.8-27.7c0-15.8,12.1-27.7,30.5-27.7c18.4,0,29.7,11.9,30.1,27.7 C45.6,316.1,33.9,328.4,15.1,328.4z M241,508.1h-56.6v-82.6c0-21.6-8.8-36.4-28.3-36.4c-14.9,0-23.2,10-27,19.6 c-1.4,3.4-1.2,8.2-1.2,13.1v86.3H71.8c0,0,0.7-146.4,0-159.7h56.1v25.1c3.3-11,21.2-26.6,49.8-26.6c35.5,0,63.3,23,63.3,72.4V508.1z "></path> </g></svg>
+        </a>
+      </div>
+      <span>Author: Vladimir Sorokin</span>
+    </footer>
 
     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
     <script type="module" src="/src/main.js"></script>
