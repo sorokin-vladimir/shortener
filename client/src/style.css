@@ -69,6 +69,7 @@ main {
 
 .logo-shor {
   opacity: 0.5;
+  font-weight: 400;
 }
 
 .logo-cu {
@@ -134,16 +135,18 @@ main {
   transform: translateY(1px) scale(0.9);
 }
 
-.icon-cut, .iconify {
+.icon-cut {
   transform: rotateZ(-52deg);
   fill: #000;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
-.icon-cut g#SVGRepo_bgCarrier {
+.icon-cut g#cut_bgCarrier {
   stroke-width: 0;
 }
 
-.icon-cut g#SVGRepo_tracerCarrier {
+.icon-cut g#cut_tracerCarrier {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -204,10 +207,28 @@ main {
 footer {
   background-color: #e2e2e2;
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr 1fr auto auto;
   align-items: center;
   column-gap: 1rem;
   user-select: none;
+}
+.link-telegram {
+  justify-self: start;
+}
+
+.icon-telegram {
+  fill: #000;
+  width: 2rem;
+  height: 2rem;
+}
+
+.icon-telegram g#telegram_bgCarrier {
+  stroke-width: 0;
+}
+
+.icon-telegram g#telegram_tracerCarrier {
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .footer-links {
@@ -215,18 +236,60 @@ footer {
   gap: 1rem;
 }
 
-.footer-links a {
-  transform-origin: bottom;
-  transition: transform 0.2s;
+.icon-github {
+  fill: #000;
+  width: 2rem;
+  height: 2rem;
 }
 
-.footer-links a:hover {
+.icon-github g#github_bgCarrier {
+  stroke-width: 0;
+}
+
+.icon-github g#github_tracerCarrier {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-github g#Page-1 {
+  stroke: none;
+  stroke-width: 1;
+  fill: none;
+  fill-rule: evenodd;
+}
+
+.icon-github g#Dribbble-Light-Preview {
+  fill: #000;
+}
+
+.icon-linkedin {
+  fill: #000;
+  height: 2rem;
+  width: 2rem;
+}
+
+.icon-linkedin g#linkedin_bgCarrier {
+  stroke-width: 0;
+}
+
+.icon-linkedin g#linkedin_tracerCarrier {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+footer a {
+  transform-origin: bottom;
+  transition: transform 0.15s;
+}
+
+footer a:hover {
   transform: scale(1.1);
 }
 
 .htmx-indicator{
   fill: none;
-  stroke-width: 0;
+  width: 2.5rem;
+  height: 2.5rem;
   display: none;
   -webkit-animation: rotating 1s linear infinite;
   -moz-animation: rotating 1s linear infinite;
@@ -241,7 +304,11 @@ footer {
   display: none;
 }
 
-.htmx-indicator g {
+.htmx-indicator g#loader-bgCarrier {
+  stroke-width: 0;
+}
+
+.htmx-indicator g#loader_tracerCarrier {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -254,10 +321,15 @@ footer {
 
 .icon-copy {
   fill: none;
+  width: 1.9rem;
+  height: 1.9rem;
 }
 
-.icon-copy g {
+.icon-copy g#copy_bgCarrier {
   stroke-width: 0;
+}
+
+.icon-copy g#copy_tracerCarrier {
   stroke-linecap: round;
   stroke-linejoin: round;
 }

@@ -21,7 +21,7 @@ function copyHandler() {
     try {
         document.execCommand("copy");
     } catch (err) {
-        console.error("Failed to copy text: ", err);
+        // console.error("Failed to copy text: ", err);
     }
     input.blur();
     return;
